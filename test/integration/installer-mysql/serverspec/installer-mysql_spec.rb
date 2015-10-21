@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'Postgresql' do
-  describe port(5432) do
+describe 'MySQL' do
+  describe port(3306) do
     it { should be_listening }
   end
 end

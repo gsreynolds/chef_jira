@@ -5,21 +5,20 @@ default['jira']['version']            = '6.4.11'
 default['jira']['user']               = 'jira'
 default['jira']['backup_when_update'] = false
 default['jira']['ssl']                = false
-default['jira']['update']             = false
 
 # Defaults are automatically selected from version via helper functions
 default['jira']['url']      = nil
 default['jira']['checksum'] = nil
 
-default['jira']['apache2']['access_log']         = node['apache']['log_dir'] + '/jira-access.log'
-default['jira']['apache2']['error_log']          = node['apache']['log_dir'] + '/jira-error.log'
+default['jira']['apache2']['access_log']         = ''
+default['jira']['apache2']['error_log']          = ''
 default['jira']['apache2']['port']               = 80
 default['jira']['apache2']['virtual_host_name']  = node['fqdn']
 default['jira']['apache2']['virtual_host_alias'] = node['hostname']
 
-default['jira']['apache2']['ssl']['access_log']       = node['apache']['log_dir'] + '/jira-ssl-access.log'
+default['jira']['apache2']['ssl']['access_log']       = ''
+default['jira']['apache2']['ssl']['error_log']        = ''
 default['jira']['apache2']['ssl']['chain_file']       = ''
-default['jira']['apache2']['ssl']['error_log']        = node['apache']['log_dir'] + '/jira-ssl-error.log'
 default['jira']['apache2']['ssl']['port']             = 443
 
 case node['platform_family']
@@ -36,6 +35,14 @@ default['jira']['database']['name']     = 'jira'
 default['jira']['database']['password'] = 'changeit'
 default['jira']['database']['type']     = 'mysql'
 default['jira']['database']['user']     = 'jira'
+
+# Needed for postgresql unfortunately
+if node['jira']['database']['type'] == 'postgresql'
+  case node['platform_family']
+  when 'debian'
+    default['apt']['compile_time_update'] = true
+  end
+end
 
 # Default is automatically selected from database type via helper function
 default['jira']['database']['port'] = nil

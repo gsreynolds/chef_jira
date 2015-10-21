@@ -1,18 +1,27 @@
 ## x.y.z (pending)
 
-* Use https for Jira downloads.
-  [[GH-18]](https://github.com/afklm/chef_jira/issues/18)
-* Added service restart when ark resource changes.
-  [[GH-16]](https://github.com/afklm/chef_jira/issues/16)
-* Added support for PostgreSQL 9.2+ in `dbconfig.xml`.
-  [[GH-14]](https://github.com/afklm/chef_jira/issues/14)
-* Fixed LWRPs after cookbook name change.
-  [[GH-13]](https://github.com/afklm/chef_jira/pull/13)
-* Set Tomcat `proxyName`/`proxyPort` even without SSL.
-  [[GH-11]](https://github.com/afklm/chef_jira/issues/11)
-* Removed unnecessary non-dynamic `web.xml` template.
-  [[GH-10]](https://github.com/afklm/chef_jira/issues/10)
+## 2.5.1
 
+* MIGRATED: renamed cookbook chef_jira -> jira after getting the supermarket
+            namespace
+* Bump default version to JIRA 6.4.11
+* Use https for Jira downloads.
+  [[GH-18]](https://github.com/afklm/jira/issues/18)
+* Added service restart when ark resource changes.
+  [[GH-16]](https://github.com/afklm/jira/issues/16)
+* Added support for PostgreSQL 9.2+ in `dbconfig.xml`.
+  [[GH-14]](https://github.com/afklm/jira/issues/14)
+* Fixed LWRPs after cookbook name change.
+  [[GH-13]](https://github.com/afklm/jira/pull/13)
+* Set Tomcat `proxyName`/`proxyPort` even without SSL.
+  [[GH-11]](https://github.com/afklm/jira/issues/11)
+* Removed unnecessary non-dynamic `web.xml` template.
+  [[GH-10]](https://github.com/afklm/jira/issues/10)
+* Fixed setting of `jira.home` for all install types.
+  [[GH-15]](https://github.com/afklm/jira/issues/15)
+
+Thanks go to @elijah @gsreynolds @legal90 and @patcon for helping out in this
+release.
 
 ## 2.1.0
 
