@@ -1,5 +1,27 @@
 ## x.y.z (pending)
 
+## 2.7.0
+
+* Added support for JIRA 7.0
+* Added `node['jira']['flavor']` attribute with default value of 'software'
+* Bump default JIRA version to 7.0.0
+
+## 2.6.3
+
+* Add JIRA 6.4.12 and bump default version
+
+## 2.6.2
+
+* Added a `node['jira']['group']` attribute for clarity and override ability
+* Issue warn in library for unsupported DB types to make override possible
+
+## 2.6.1
+
+* Removed unused config entries from cookbook metadata
+* Replaced file cookbook with FileEdit#search_file_replace
+
+## 2.6.0
+
 * Redirect http-based requests to https
 * Auto upgrade if `node['jira']['version']` is higher than installed version
 * Configures Crowd SSO if `node['jira']['crowd_sso']['enabled']` is true

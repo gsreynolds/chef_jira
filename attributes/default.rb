@@ -1,8 +1,10 @@
 default['jira']['home_path']          = '/var/atlassian/application-data/jira'
 default['jira']['install_path']       = '/opt/atlassian/jira'
 default['jira']['install_type']       = 'installer'
-default['jira']['version']            = '6.4.11'
+default['jira']['version']            = '7.0.0'
+default['jira']['flavor']             = 'software'
 default['jira']['user']               = 'jira'
+default['jira']['group']              = 'jira'
 default['jira']['backup_when_update'] = false
 default['jira']['ssl']                = false
 
