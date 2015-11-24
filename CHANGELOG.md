@@ -1,5 +1,17 @@
 ## x.y.z (pending)
 
+## 2.7.3
+
+* Added JIRA 7.0.2
+* Bumped default version to 7.0.2
+
+## 2.7.2
+
+* Added sensitive true for crowd_sso template
+* Set Postgres DB owner to JIRA user
+* Explicitly set `home_path` perms.
+  [[#48]](https://github.com/afklm/jira/issues/48)
+
 ## 2.7.0
 
 * Added support for JIRA 7.0
