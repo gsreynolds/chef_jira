@@ -1,5 +1,24 @@
 ## x.y.z (pending)
 
+## 2.8.0
+
+* Add JIRA 7.0.4
+* Bumped default version to 7.0.4
+* Switched default DB to Postgres
+* Add basic Postgres tuning
+* Add default pwd for MySQL installs on localhost
+* Set collation to 'C' for PostgreSQL database
+* Added cloud testing config for `test-kitchen` via DigitalOcean.
+  [[GH-55]](https://github.com/afklm/jira/issues/55)
+* Force apache restart to circumvent `mod_proxy` bug on Ubuntu 12.04.
+  [[GH-52]](https://github.com/afklm/jira/issues/52)
+* Use versioned ark install paths.
+  [[GH-56]](https://github.com/afklm/jira/issues/56)
+* Small fixups to make all test suites succeed on cloud platforms.
+  [[GH-57]](https://github.com/afklm/jira/issues/57)
+* Fix standalone directory perms and accompanying CentOS bug.
+  [[GH-57]](https://github.com/afklm/jira/issues/57)
+
 ## 2.7.3
 
 * Added JIRA 7.0.2

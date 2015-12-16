@@ -1,7 +1,7 @@
 default['jira']['home_path']          = '/var/atlassian/application-data/jira'
 default['jira']['install_path']       = '/opt/atlassian/jira'
 default['jira']['install_type']       = 'installer'
-default['jira']['version']            = '7.0.2'
+default['jira']['version']            = '7.0.4'
 default['jira']['flavor']             = 'software'
 default['jira']['user']               = 'jira'
 default['jira']['group']              = 'jira'
@@ -35,15 +35,23 @@ end
 default['jira']['database']['host']     = '127.0.0.1'
 default['jira']['database']['name']     = 'jira'
 default['jira']['database']['password'] = 'changeit'
-default['jira']['database']['type']     = 'mysql'
+default['jira']['database']['type']     = 'postgresql'
 default['jira']['database']['user']     = 'jira'
 
-# Needed for postgresql unfortunately
 if node['jira']['database']['type'] == 'postgresql'
+  default['postgresql']['config_pgtune']['db_type']      = 'web'       # postgresql tuning for web (assumes postgresql on same host)
+  default['postgresql']['config_pgtune']['total_memory'] = '1048576kB' # limit max memory of the postgresql server to 1G
+
+  # Needed for postgresql unfortunately
   case node['platform_family']
   when 'debian'
     default['apt']['compile_time_update'] = true
   end
+end
+
+# Sets mysql root password if mysql is installed on same host
+if node['jira']['database']['type'] == 'mysql' && node['jira']['database']['host'] == '127.0.0.1'
+  default['mysql']['server_root_password'] = 'changethistosomethingsensible'
 end
 
 # Default is automatically selected from database type via helper function
