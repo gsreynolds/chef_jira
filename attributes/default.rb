@@ -1,17 +1,29 @@
 default['jira']['home_path']          = '/var/atlassian/application-data/jira'
 default['jira']['install_path']       = '/opt/atlassian/jira'
 default['jira']['install_type']       = 'installer'
-default['jira']['version']            = '7.0.4'
+default['jira']['version']            = '7.0.10'
 default['jira']['flavor']             = 'software'
 default['jira']['user']               = 'jira'
 default['jira']['group']              = 'jira'
 default['jira']['backup_when_update'] = false
 default['jira']['ssl']                = false
 
+# Types include: 'mixed', 'dedicated', 'shared'
+# 'mixed'     - JIRA and DB run on the same system
+# 'dedicated' - JIRA has the system all to itself
+# 'shared'    - JIRA shares the system with the DB and other applications
+default['jira']['autotune']['enabled'] = false
+default['jira']['autotune']['type']    = 'mixed'
+
+# If you don't want total system memory to be automatically discovered through
+# Ohai, uncomment the following line and set your own value in kB.
+# default['jira']['autotune']['total_memory'] = '1048576kB' # 1024m
+
 # Defaults are automatically selected from version via helper functions
 default['jira']['url']      = nil
 default['jira']['checksum'] = nil
 
+default['jira']['apache2']['template_cookbook']  = 'jira'
 default['jira']['apache2']['access_log']         = ''
 default['jira']['apache2']['error_log']          = ''
 default['jira']['apache2']['port']               = 80

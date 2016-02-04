@@ -3,8 +3,6 @@ Jira Cookbook
 [![Chef cookbook](https://img.shields.io/cookbook/v/jira.svg)](https://supermarket.chef.io/cookbooks/jira)
 [![Build Status](https://secure.travis-ci.org/afklm/jira.png?branch=master)](http://travis-ci.org/afklm/jira)
 
-*WARNING* - This cookbook was essentially replaced by a new cookbook starting version 2.0. This is a breaking change.
-
 ## Description
 
 Installs/Configures Atlassian JIRA. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about JIRA releases that are tested and supported by this cookbook and its versions.
@@ -83,11 +81,32 @@ These attributes are under the `node['jira']['jvm']` namespace.
 
 Attribute       | Description                                                                       | Type   | Default
 ----------------|-----------------------------------------------------------------------------------|--------|--------
-minimum_memory  | JVM minimum memory                                                                | String | 512m
-maximum_memory  | JVM maximum memory                                                                | String | 768m
+minimum_memory  | JVM minimum memory (set by autotune recipe if autotune enabled, see below)        | String | 512m
+maximum_memory  | JVM maximum memory (set by autotune recipe if autotune enabled, see below)        | String | 768m
 maximum_permgen | JVM maximum PermGen memory                                                        | String | 256m
 java_opts       | additional JAVA_OPTS to be passed to JIRA JVM during startup                      | String | ""
 support_args    | additional JAVA_OPTS recommended by Atlassian support for JIRA JVM during startup | String | ""
+
+### JIRA Autotune Attributes
+
+These attributes are under the `node['jira']['autotune']` namespace. Autotune automatically determines appropriate settings for certain
+attributes. This feature is inspired by the `config_pgtune` recipe in the https://github.com/hw-cookbooks/postgresql cookbook. This
+initial version only supports JVM min and max memory size tuning.
+
+There are several tuning types that can be set:
+
+* 'mixed' - JIRA and DB run on the same system
+* 'dedicated' - JIRA has the system all to itself
+* 'shared' - JIRA shares the system with the DB and other applications
+
+Total available memory is auto discovered using Ohai but can be overridden by setting your own value in kB.
+
+Attribute    | Description                                                           | Type    | Default
+-------------|-----------------------------------------------------------------------|---------|------------
+enabled      | Whether or not to autotune settings.                                  | Boolean | false
+type         | Type of tuning to apply. One of 'mixed', 'dedicated' and 'shared'.    | String  | mixed
+total_memory | Total system memory to use for autotune calculations.                 | String  | Ohai value
+
 
 ### JIRA Tomcat Attributes
 
@@ -186,9 +205,18 @@ Ubuntu 12.04 Box:
 
 ## Contributing
 
-Please see contributing information in: [CONTRIBUTING.md](CONTRIBUTING.md)
+For information on how to contribute to this cookbook, please see: [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Maintainers
+Development of this cookbook has been generously supported in part by the code contributions of the following organizations and/or users:
+
+* [University of Pennsylvania](http://www.upenn.edu/) ([@bflad](https://github.com/afklm/jira/commits?author=bflad))
+* [KLM Royal Dutch Airlines](https://www.klm.com/) ([@mvdkleijn](https://github.com/afklm/jira/commits?author=mvdkleijn))
+* [Parallels Inc.](https://www.parallels.com/) ([@legal90](https://github.com/afklm/jira/commits?author=legal90))
+* [Blended Perspectives Inc.](http://www.blendedperspectives.com/) ([@patcon](https://github.com/afklm/jira/commits?author=patcon))
+
+For a full list of contributors, please see [Github](https://github.com/afklm/jira/graphs/contributors)
+
+## Current maintainers
 
 * KLM Royal Dutch Airlines
 
