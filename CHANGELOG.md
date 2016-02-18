@@ -1,5 +1,13 @@
 ## x.y.z (pending)
 
+## 2.12.0
+
+* Add JIRA version 7.1.0 support
+* Add simple logging message if JIRA does not need upgrading.
+
+## 2.11.1
+
+* Update JIRA Software checksums for 7.0.10
 * Drop support for 5.2.x and 6.0.x releases except for latest
 
 ## 2.11.0
