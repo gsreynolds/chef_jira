@@ -1,5 +1,17 @@
 ## x.y.z (pending)
 
+## 2.12.2
+
+* Add JIRA 7.1.2 checksums
+* Bump default version to 7.1.2
+
+## 2.12.1
+
+* Fix standalone install's home_path directory ownership
+* Fix use of deprecated listen_address from apache2 cookbook
+* Fix style issues in cookbook
+* Move foodcritic rules to .foodcritic
+
 ## 2.12.0
 
 * Add JIRA version 7.1.0 support
