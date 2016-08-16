@@ -1,7 +1,7 @@
 default['jira']['home_path']          = '/var/atlassian/application-data/jira'
 default['jira']['install_path']       = '/opt/atlassian/jira'
 default['jira']['install_type']       = 'installer'
-default['jira']['version']            = '7.1.2'
+default['jira']['version']            = '7.1.7'
 default['jira']['flavor']             = 'software'
 default['jira']['user']               = 'jira'
 default['jira']['group']              = 'jira'
@@ -35,6 +35,8 @@ default['jira']['apache2']['ssl']['error_log']        = ''
 default['jira']['apache2']['ssl']['chain_file']       = ''
 default['jira']['apache2']['ssl']['port']             = 443
 
+default['apache']['listen'] |= [ "*:#{node['jira']['apache2']['port']}", "*:#{node['jira']['apache2']['ssl']['port']}" ]
+
 case node['platform_family']
 when 'rhel'
   default['jira']['apache2']['ssl']['certificate_file'] = '/etc/pki/tls/certs/localhost.crt'
@@ -49,6 +51,11 @@ default['jira']['database']['name']     = 'jira'
 default['jira']['database']['password'] = 'changeit'
 default['jira']['database']['type']     = 'postgresql'
 default['jira']['database']['user']     = 'jira'
+# Setting pool sizes for DB
+default['jira']['database']['pool-min-size'] = '20'
+default['jira']['database']['pool-max-size'] = '20'
+default['jira']['database']['pool-max-idle'] = '20'
+default['jira']['database']['pool-max-wait'] = '30000'
 
 if node['jira']['database']['type'] == 'postgresql'
   default['postgresql']['config_pgtune']['db_type']      = 'web'       # postgresql tuning for web (assumes postgresql on same host)

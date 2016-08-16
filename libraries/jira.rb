@@ -107,7 +107,7 @@ module Jira
         sums = versionsums[flavor]
       end
 
-      fail "JIRA version #{version} is not supported by the cookbook" unless sums
+      warn "JIRA version #{version} is not supported by the cookbook. Set node['jira']['checksum'] = false to disable checksum checking." unless sums
 
       case node['jira']['install_type']
       when 'installer' then sums[jira_arch]
@@ -239,6 +239,30 @@ module Jira
             'x32' => 'c33d24f724500f086c1d2c3682f3371f71dfb6e99e6d1d7f2e12a5c6c56973a0',
             'x64' => 'f72337b8d55468c2b3f0526e7496d03dd1ec9bb3d482d0269fcf87f48791094a',
             'tar' => '4837de0425845966a4138e518da5325436bbc6c91bc78e7497bfc0384dfa411b'
+          }
+        },
+        '7.1.7' => {
+          'core' => {
+            'x32' => 'e2b590c43b23f514b05cd27a37bc97bbaef9bb60098dca8c4f742c07afa12154',
+            'x64' => 'c61c2e9f208867bee6db1d82c34f6248b6f220058459e6e13c6c24b8ca80528c',
+            'tar' => '61f1def45e069a085922e24a647447709f19d3a520993c0f8f5583f4f9c5b178'
+          },
+          'software' => {
+            'x32' => '57035f4c826abf352e3ef60431602a8753cc58fe98b35f6fa72db940f6e28c78',
+            'x64' => '08f49dcfec3b0764a21d318363c2a72780c52c3e95823ade0bab233dcc36f638',
+            'tar' => '2cb08d754072293a23906d7db7ec4bce09a53d783e27145e416f63fd205e59c1'
+          }
+        },
+        '7.1.9' => {
+          'core' => {
+            'x32' => '3166c2f10b3193821b221042784985b5081de935a3fb0630e9d6dac437469d7d',
+            'x64' => '5617b87790c6d0413047e3cc7e3ad041fb410da91101c49fb759163ba2c6e998',
+            'tar' => '2cf04f25edbe19e7b6d9e7320c78af107424c7eb5e81f6cbbb69802623b695a2'
+          },
+          'software' => {
+            'x32' => '98d41db73b342c95a08fec233ddfb5da928875366e1cfea941be7f95bf0cf126',
+            'x64' => '02d5d3adecc4d218ff258ad69ac39390678434359638d1785e78562178f39408',
+            'tar' => 'f03f2a8dd42c4b5f03918b326f14d7339f16f60fee0fa4a4d9c2e04c82dbbed2'
           }
         }
       }

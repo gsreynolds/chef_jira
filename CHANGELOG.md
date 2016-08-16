@@ -1,5 +1,17 @@
 ## x.y.z (pending)
 
+## 2.14.0
+
+* Add missing settings to dbconfig.xml
+
+## 2.13.0
+
+* Add configurable DB connection pool sizes
+* Add JIRA 7.1.9 checksums
+* Add JIRA 7.1.7 checksums
+* Bump default version to 7.1.9
+* Downgrade checksum failure to warn and inform user how to bypass.
+
 ## 2.12.2
 
 * Add JIRA 7.1.2 checksums
