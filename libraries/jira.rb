@@ -72,9 +72,13 @@ module Jira
       # By default we assume you want >= 7.0.0
       v = Gem::Version.new(version)
 
-      # Software had a different set of URLs for from 7.0.0 to 7.1.7
-      if node['jira']['flavor'].downcase == 'software' && (v >= Gem::Version.new('7.0.0')) && (v < Gem::Version.new('7.1.9'))
-        product = "#{base_url}/atlassian-jira-#{node['jira']['flavor']}-#{version}-jira-#{version}"
+      if node['jira']['flavor'].downcase == 'software' && (v >= Gem::Version.new('7.0.0'))
+        # Software had a different set of URLs for from 7.0.0 to 7.1.7
+        if v < Gem::Version.new('7.1.9')
+          product = "#{base_url}/atlassian-jira-#{node['jira']['flavor']}-#{version}-jira-#{version}"
+        elsif v >= Gem::Version.new('7.2')
+          product = "#{base_url}/atlassian-jira-#{node['jira']['flavor']}-#{version}"
+        end
       elsif v < Gem::Version.new(7)
         product = "#{base_url}/atlassian-jira-#{version}"
       end
@@ -324,6 +328,31 @@ module Jira
             'x32' => '9d3a0413b32c07ffbfb717efb07d8bde28d9dfdac7cd24396bb6b151757e40d2',
             'x64' => 'e0d02381d951a0f745c3e1e77e673932d504c90db757f0caa9cd22ab13a6d910',
             'tar' => 'c9c310fdf4702403f119b804907be8143366b7a9d71d0e28356fe4287a706708'
+          }
+        },
+        '7.2.4' => {
+          'core' => {
+            'x32' => '4b21768c1a04eb6c46fb29b50491c0c50bfbaee0f37d8bb849131fe1264d2140',
+            'x64' => 'b7428584ea394855686a5e5fdb7bc1f636dd2ad133c8a4de39ba6b06c77edd34',
+            'tar' => 'c5927ef75eec40b61e59b0fe4139ef0a2e38765d611cd8458c7b478060eeef52'
+          },
+          'software' => {
+            'x32' => '785052efba8d410fba9d694e94e453879a56643ecd7bdbc299e813a8160f2555',
+            'x64' => '4221c95932f4fa14394526a2ae03e4424f8a0e86979b7c92a8e8c4a020801521',
+            'tar' => '0a57714dc5cf8d136a5ecf9156c6875f5547ce6c2b7aac9acc94695ea2d4b529'
+          }
+        },
+        # 7.2.5 Cancelled
+        '7.2.6' => {
+          'core' => {
+            'x32' => 'd3f9c7bdcc6cf0bd9c68f654b12d1d65e2d45b69e71868c219c300571adcc5ca',
+            'x64' => 'e6afc6aed46b85ee799fd077bf94c2fc7e70ae5d2630580e630aaf97c4cc8d48',
+            'tar' => '4136ffa64c44c84dca33032b1f0fc05b2316fa6beb54cddf0b922084378908e3'
+          },
+          'software' => {
+            'x32' => 'b37882cdadbc98a19bdb833c68a6ee95c8de58d39cf1e14189888b034c676a08',
+            'x64' => 'fb8e1a17f17676373c99bb00df717a148e69897106a66d6f4be3cabfd9af4626',
+            'tar' => '9369a8ce67ff200aa098a14690fd65a023f6ea7c5dbddf300462456cd35bea84'
           }
         },
         '7.2.7' => {

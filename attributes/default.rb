@@ -1,7 +1,7 @@
 default['jira']['home_path']          = '/var/atlassian/application-data/jira'
 default['jira']['install_path']       = '/opt/atlassian/jira'
 default['jira']['install_type']       = 'installer'
-default['jira']['version']            = '7.3.0'
+default['jira']['version']            = '7.1.7'
 default['jira']['flavor']             = 'software'
 default['jira']['user']               = 'jira'
 default['jira']['group']              = 'jira'
@@ -23,6 +23,7 @@ default['jira']['autotune']['type']    = 'mixed'
 default['jira']['url']      = nil
 default['jira']['checksum'] = nil
 
+default['jira']['apache2']['enabled']            = true
 default['jira']['apache2']['template_cookbook']  = 'jira'
 default['jira']['apache2']['access_log']         = ''
 default['jira']['apache2']['error_log']          = ''
@@ -35,7 +36,15 @@ default['jira']['apache2']['ssl']['error_log']        = ''
 default['jira']['apache2']['ssl']['chain_file']       = ''
 default['jira']['apache2']['ssl']['port']             = 443
 
-default['apache']['listen'] = ["*:#{node['jira']['apache2']['port']}", "*:#{node['jira']['apache2']['ssl']['port']}"]
+if node['jira']['apache2']['enabled'] == true
+  default['jira']['proxy']['name']        = node['jira']['apache2']['virtual_host_name']
+  default['jira']['proxy']['ssl']['port'] = node['jira']['apache2']['ssl']['port']
+else
+  default['jira']['proxy']['name']        = node['fqdn']
+  default['jira']['proxy']['ssl']['port'] = 443
+end
+
+default['apache']['listen'] |= ["*:#{node['jira']['apache2']['port']}", "*:#{node['jira']['apache2']['ssl']['port']}"]
 
 case node['platform_family']
 when 'rhel'
